@@ -3,7 +3,7 @@ const exec = util.promisify(require('child_process').exec);
 
 const ping = async (host, port) => {
     // Check if powershell is installed on the system
-    const PowerShellVersion = await exec('powershell -v');
+    const PowerShellVersion = await exec('powershell $PSVersionTable');
     if (PowerShellVersion.stderr) throw new Error(PowerShellVersion.stderr);
     // Test-NetConnection is a PowerShell command that tests the connection to a host on a specified port.
     // If the connection is successful, it returns a string that includes 'TcpTestSucceeded : True'
