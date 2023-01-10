@@ -1,7 +1,7 @@
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
-export const ping = async (host, port) => {
+const ping = async (host, port) => {
     // Check if powershell is installed on the system
     const PowerShellVersion = await exec('powershell -v');
     if (PowerShellVersion.stderr) throw new Error(PowerShellVersion.stderr);
@@ -13,6 +13,8 @@ export const ping = async (host, port) => {
     if (stdout.includes('TcpTestSucceeded : True')) return true;
     return false;
 }
+
+module.exports = {ping};
 
 // Usage
 // ping('google.com', 80).then((res) => {
